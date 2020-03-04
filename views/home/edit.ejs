@@ -19,7 +19,7 @@
 			</tr>
 			<tr>
 				<td>Username: </td>
-				<td><input type="text" name="username" value="<%= user.username %>"></td>
+				<td><input type="text" readonly name="username" value="<%= user.username %>"></td>
 			</tr>
 			<tr>
 				<td>Password: </td>
@@ -27,7 +27,18 @@
 			</tr>
 			<tr>
 				<td>Type: </td>
-				<td><input type="text" name="type" value="<%= user.type %>"></td>
+				<td>
+					<select name="type">
+						<option value="admin" <% if(user.type == "admin") { %> selected <% } %> >Admin</option>
+						<option value="moderator" <% if(user.type == "moderator") { %> selected <% } %> >Moderator</option>
+						<option value="employee" <% if(user.type == "employee") { %> selected <% } %> >Employee</option>
+						<option value="customer" <% if(user.type == "customer") { %> selected <% } %> >Customer</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Phone: </td>
+				<td><input type="number" name="phone" value="<%= user.phone %>"></td>
 			</tr>
 			<tr>
 				<td></td>

@@ -12,7 +12,8 @@ router.post('/', function(req, res){
 		username: req.body.uname,
 		name: req.body.name,
 		password: req.body.password,
-		confirm: req.body.confirmPassword
+		confirm: req.body.confirmPassword,
+		phone: req.body.phone
 	};
 
 	if (!user.username) {

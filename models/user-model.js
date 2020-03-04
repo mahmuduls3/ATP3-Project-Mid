@@ -12,7 +12,7 @@ module.exports= {
 		});
 	},
 	getAllCustomer : function(callback){
-		var sql = "select * from customer where type='customer'";
+		var sql = "select * from customer order by customer_id";
 		db.getResults(sql, null, function(results){
 			if(results.length > 0){
 				callback(results);
@@ -54,8 +54,8 @@ module.exports= {
 		});
 	},
 	update : function(user, callback){
-		var sql = "update customer set password=?, phone=? where username=?";
-		db.execute(sql, [user.password, user.phone, user.username], function(status){
+		var sql = "update customer set password=?, type=?, phone=? where username=?";
+		db.execute(sql, [user.password, user.type, user.phone, user.username], function(status){
 			if(status){
 				callback(true);
 			}else{
@@ -66,6 +66,16 @@ module.exports= {
 	delete: function(user, callback){
 		var sql = "delete from customer where username=?";
 		db.execute(sql, [user.username], function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
+	insertUser: function(user, callback){
+		var sql = "insert into customer values(?,?,?,?,?,?,?,?,?,?)";
+		db.execute(sql, [null, user.username, user.name, user.password, user.type, user.phone, 0, 0, 0, 0], function(status){
 			if(status){
 				callback(true);
 			}else{

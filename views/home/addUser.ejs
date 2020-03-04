@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add User</title>
+	<link rel="stylesheet" type="text/css" href="admin/style.css">
+</head>
+<body>
+	<h2>Add User</h2>
+
+	<form method="post">
+		Username: <input type="text" name="uname"><br>
+		Name: <input type="text" name="name"><br>
+		Password: <input type="password" name="password"><br>
+		Confirm Password: <input type="password" name="confirmPassword"><br>
+		<select name="type">
+			<option type="text" value="admin">Admin</option>
+			<option type="text" value="moderator">Moderator</option>
+			<option type="text" value="employee">Employee</option>
+			<option type="text" value="customer">Customer</option>
+		</select>
+		Phone: <input type="number" name="phone"><br>
+		<input type="submit" name="" value="Add new user">
+	</form>
+	<hr>
+	<h4>Click for <a href="/login">Login</a><br>
+		Go to <a href="/">Main Page</a>
+	</h4>
+</body>
+</html>
