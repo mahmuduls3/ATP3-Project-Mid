@@ -63,9 +63,9 @@ module.exports= {
 			}
 		});
 	},
-	delete: function(user, callback){
-		var sql = "delete from customer where username=?";
-		db.execute(sql, [user.username], function(status){
+	delete: function(id, callback){
+		var sql = "delete from customer where customer_id=?";
+		db.execute(sql, [id], function(status){
 			if(status){
 				callback(true);
 			}else{
@@ -82,5 +82,15 @@ module.exports= {
 				callback(false);
 			}
 		});
-	}
+	},
+	validateUsername: function(username, callback){
+		var sql = "select * from customer where username=?";
+		db.getResults(sql, [username], function(results){
+			if(results.length > 0){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
 }

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var userModel = require.main.require('./models/user-model');
 
-
 router.get('*', function(req, res, next){
 	if(req.cookies['username'] == null){
 		res.redirect('/login');
@@ -59,7 +58,7 @@ router.post('/addUser', function(req, res){
 		username: req.body.uname,
 		name: req.body.name,
 		password: req.body.password,
-		confirm: req.body.confirmPassword,
+		confirmPassword: req.body.confirmPassword,
 		type: req.body.type,
 		phone: req.body.phone
 	};
@@ -70,9 +69,9 @@ router.post('/addUser', function(req, res){
 		if (!user.password) {
 			res.send('Password cannot be empty');
 		} else {
-			if (!user.phone) {
-				userModel.getByUsername(user.username, function(status){
-			 	if(status){
+			if (user.phone) {
+				userModel.validateUsername(user.username, function(status){
+			 	if(!status){
 					if (user.password == user.confirmPassword) {
 						userModel.insertUser(user, function(status1){
 							if (status1) {
@@ -96,5 +95,24 @@ router.post('/addUser', function(req, res){
 	}
 	
 });
+
+router.get('/delete/:customer_id', function(req, res){
+	
+	userModel.getByCustomerId(req.params.customer_id, function(result){
+		res.render('home/delete', {user: result});
+	});
+})
+
+router.post('/delete/:customer_id', function(req, res){
+	
+	userModel.delete(req.params.customer_id, function(status){
+		if(status){
+			res.redirect('/home/view_users');
+		}else{
+			res.redirect('/home/delete/'+req.params.customer_id);
+		}
+	});
+});
+
 
 module.exports = router;

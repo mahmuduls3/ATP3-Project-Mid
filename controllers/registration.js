@@ -6,13 +6,17 @@ router.get('/', function(req, res){
 	res.render('registration/index');
 });
 
+router.get('/success', function(req, res){
+	res.render('registration/success');
+});
+
 router.post('/', function(req, res){
 
 	var user ={
 		username: req.body.uname,
 		name: req.body.name,
 		password: req.body.password,
-		confirm: req.body.confirmPassword,
+		confirmPassword: req.body.confirmPassword,
 		phone: req.body.phone
 	};
 
@@ -23,14 +27,16 @@ router.post('/', function(req, res){
 			res.send('Password cannot be empty');
 		} else {
 			if (!user.phone) {
-				userModel.getByUsername(user.username, function(status){
-			 	if(status){
+				res.send('Phone cannot be empty');
+			} else {
+				userModel.validateUsername(user.username, function(status){
+			 	if(!status){
 					if (user.password == user.confirmPassword) {
 						userModel.insert(user, function(status1){
 							if (status1) {
 								res.redirect('/registration/success');
 							}else{
-								res.send('Registration has not benn completed');
+								res.send('Registration has not been completed');
 							}
 						})
 					}else{
@@ -40,8 +46,6 @@ router.post('/', function(req, res){
 					res.send('Username already exists');
 				}
 				});
-			} else {
-				res.send('Phone cannot be empty');
 			}
 			
 		}
