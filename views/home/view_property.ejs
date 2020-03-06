@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Property List</title>
+</head>
+<body>
+	<div>
+			<h2>Property List</h2> 		
+	</div>
+
+	<a href="/home">Back</a>|
+	<a href="/logout">Logout</a><br>
+
+	<table border="1">
+		<tr>
+			<td>Id</td>
+			<td>Title</td>
+			<td>Price</td>
+			<td>Area</td>
+			<td>Type</td>
+			<td>Purpose</td>
+			<td>Bed</td>
+			<td>Bath</td>
+			<td>Sq Ft</td>
+			<td>Floor</td>
+			<td>Status</td>
+			<td>Clicks</td>
+			<td>Date</td>
+			<td>Posted By</td>
+			<td>Action</td>
+		</tr>
+	<% for(var i=0; i < propertylist.length; i++){ %>
+		<tr>
+			<td><%= propertylist[i].property_id %></td>
+			<td><%= propertylist[i].title %></td>
+			<td><%= propertylist[i].property_price %></td>
+			<td><%= propertylist[i].property_area %></td>
+			<td><%= propertylist[i].p_type %></td>
+			<td><%= propertylist[i].style %></td>
+			<td><%= propertylist[i].bed %></td>
+			<td><%= propertylist[i].bath %></td>
+			<td><%= propertylist[i].feet %></td>
+			<td><%= propertylist[i].floor %></td>
+			<td><%= propertylist[i].status %></td>
+			<td><%= propertylist[i].no_of_clicks %></td>
+			<td><%= propertylist[i].date.toString().split(" ").slice(0, 4).join(" ") %></td>
+			<td><%= propertylist[i].username %></td>
+			<td>
+				<a href="/home/view_property_detail/<%= propertylist[i].property_id %>">View</a> | 
+				<a href="/home/delete_property/<%= propertylist[i].property_id %>">DELETE</a> 
+			</td>
+		</tr>
+	<%  } %>
+	</table>
+
+</body>
+</html>

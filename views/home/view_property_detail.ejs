@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Property Detail</title>
+</head>
+<body>
+	<div>
+			<h2>Property Detail Page</h2> 		
+	</div>
+
+	<a href="/home/view_property">Back</a> |
+	<a href="/logout">Logout</a><br>
+
+		<table>
+			<tr>
+				<td>ID: </td>
+				<td><%= property.property_id %></td>
+			</tr>
+			<tr>
+				<td>Title: </td>
+				<td><%= property.title %></td>
+			</tr>
+			<tr>
+				<td>Price: </td>
+				<td><%= property.property_price %></td>
+			</tr>
+			<tr>
+				<td>Area: </td>
+				<td><%= property.property_area %></td>
+			</tr>
+			<tr>
+				<td>Type: </td>
+				<td><%= property.p_type %></td>
+			</tr>
+			<tr>
+				<td>Purpose: </td>
+				<td><%= property.style %></td>
+			</tr>
+			<tr>
+				<td>Bed: </td>
+				<td><%= property.bed %></td>
+			</tr>
+			<tr>
+				<td>Bath: </td>
+				<td><%= property.bath %></td>
+			</tr>
+			<tr>
+				<td>Sq ft: </td>
+				<td><%= property.feet %></td>
+			</tr>
+			<tr>
+				<td>Floor: </td>
+				<td><%= property.floor %></td>
+			</tr>
+			<tr>
+				<td>Description: </td>
+				<td><%= property.description %></td>
+			</tr>
+			<tr>
+				<td>Status: </td>
+				<td><%= property.status %></td>
+			</tr>
+			<tr>
+				<td>Clicks: </td>
+				<td><%= property.no_of_clicks %></td>
+			</tr>
+			<tr>
+				<td>Date: </td>
+				<td><%= property.date.toString().split(" ").slice(0, 4).join(" ") %></td>
+			</tr>
+			<tr>
+				<td>Posted By: </td>
+				<td><%= property.username %></td>
+			</tr>
+			
+		</table>
+
+
+</body>
+</html>

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var userModel = require.main.require('./models/user-model');
+var propertyModel = require.main.require('./models/property-model');
+
 
 router.get('*', function(req, res, next){
 	if(req.cookies['username'] == null){
@@ -120,6 +122,40 @@ router.post('/delete/:customer_id', function(req, res){
 			res.redirect('/home/view_users');
 		}else{
 			res.redirect('/home/delete/'+req.params.customer_id);
+		}
+	});
+});
+
+router.get('/view_property', function(req, res){
+	
+		propertyModel.getAllProperty(function(results){
+			if(results.length > 0){
+				res.render('home/view_property', {propertylist: results});
+			}else{
+				res.redirect('/home');
+			}
+		});
+});
+
+router.get('/view_property_detail/:property_id', function(req, res){
+	propertyModel.getByPropertyId(req.params.property_id, function(result){
+		res.render('home/view_property_detail', {property: result});
+	});
+});
+
+router.get('/delete_property/:property_id', function(req, res){
+	propertyModel.getByPropertyId(req.params.property_id, function(result){
+		res.render('home/delete_property', {property: result});
+	});
+});
+
+router.post('/delete_property/:property_id', function(req, res){
+	
+	propertyModel.delete(req.params.property_id, function(status){
+		if(status){
+			res.redirect('/home/view_property');
+		}else{
+			res.redirect('/home/delete/'+req.params.property_id);
 		}
 	});
 });

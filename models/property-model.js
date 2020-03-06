@@ -53,5 +53,15 @@ module.exports= {
 			}
 		});
 	},
+	delete: function(id, callback){
+		var sql = "delete from property where property_id=?";
+		db.execute(sql, [id], function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	}
 
 }
