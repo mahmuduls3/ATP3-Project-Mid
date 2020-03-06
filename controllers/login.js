@@ -15,8 +15,14 @@ router.post('/', function(req, res){
 
 	userModel.validateUser(user, function(status){
 	 	if(status){
-			res.cookie('username', req.body.uname);
-			res.redirect('/home');
+	 		userModel.getByUsername(user.username, function(result){
+	 			if(result.type == 'admin'){
+	 				res.cookie('username', req.body.uname);
+					res.redirect('/home');
+	 			}else{
+	 				res.send('This is not my part');
+	 			}
+	 		});
 		}else{
 			res.send('invalid username/password');
 		}

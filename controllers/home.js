@@ -52,6 +52,12 @@ router.post('/edit/:customer_id', function(req, res){
 		});
 });
 
+router.get('/addUser', function(req, res){
+	userModel.getByUsername(req.cookies['username'], function(result){
+		res.render('home/addUser', {user: result});
+	});
+});
+
 router.post('/addUser', function(req, res){
 
 	var user ={
@@ -60,7 +66,8 @@ router.post('/addUser', function(req, res){
 		password: req.body.password,
 		confirmPassword: req.body.confirmPassword,
 		type: req.body.type,
-		phone: req.body.phone
+		phone: req.body.phone,
+		email: req.body.email
 	};
 
 	if (!user.username) {
@@ -69,28 +76,31 @@ router.post('/addUser', function(req, res){
 		if (!user.password) {
 			res.send('Password cannot be empty');
 		} else {
-			if (user.phone) {
-				userModel.validateUsername(user.username, function(status){
-			 	if(!status){
-					if (user.password == user.confirmPassword) {
-						userModel.insertUser(user, function(status1){
-							if (status1) {
-								res.redirect('/registration/success');
-							}else{
-								res.send('Registration has not benn completed');
-							}
-						})
+			if(user.email){
+				if (user.phone) {
+					userModel.validateUsername(user.username, function(status){
+				 	if(!status){
+						if (user.password == user.confirmPassword) {
+							userModel.insertUser(user, function(status1){
+								if (status1) {
+									res.redirect('/registration/addUserSuccess');
+								}else{
+									res.send('Registration has not benn completed');
+								}
+							})
+						}else{
+							res.send('Confirm Password did not match');
+						}
 					}else{
-						res.send('Confirm Password did not match');
+						res.send('Username already exists');
 					}
-				}else{
-					res.send('Username already exists');
+					});
+				} else {
+					res.send('Phone cannot be empty');
 				}
-				});
-			} else {
-				res.send('Phone cannot be empty');
+			}else{
+				res.send('Email cannot be empty');
 			}
-			
 		}
 	}
 	
