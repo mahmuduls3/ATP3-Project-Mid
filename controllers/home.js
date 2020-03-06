@@ -159,6 +159,18 @@ router.post('/delete_property/:property_id', function(req, res){
 		}
 	});
 });
+/*
+router.get('/user_detail/:username', function(req, res){
+	userModel.getByUsername(req.params.username, function(result){
+		res.render('home/user_detail', {user: result});
+	});
+});
+*/
+router.get('/user_detail/:username', function(req, res){
+	userModel.getByUsername(req.params.username, function(result){
+		res.render('home/user_detail', {user: result});
+	});
+});
 
 
 module.exports = router;

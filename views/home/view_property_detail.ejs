@@ -8,7 +8,8 @@
 			<h2>Property Detail Page</h2> 		
 	</div>
 
-	<a href="/home/view_property">Back</a> |
+	<a href="/home/view_users">View Users</a> |
+	<a href="/home/view_property">View Properties</a> |
 	<a href="/logout">Logout</a><br>
 
 		<table>
@@ -70,7 +71,7 @@
 			</tr>
 			<tr>
 				<td>Posted By: </td>
-				<td><%= property.username %></td>
+				<td><a href="/home/user_detail/<%= property.username %>"><%= property.username %></a></td>
 			</tr>
 			
 		</table>

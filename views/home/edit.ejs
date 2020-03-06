@@ -8,7 +8,7 @@
 			<h2>Edit Page</h2> 		
 	</div>
 
-	<a href="/home">Back</a> |
+	<a href="/home/view_users">Back</a> |
 	<a href="/logout">Logout</a><br>
 	
 	<form method="post">
@@ -22,8 +22,8 @@
 				<td><input type="text" readonly name="username" value="<%= user.username %>"></td>
 			</tr>
 			<tr>
-				<td>Password: </td>
-				<td><input type="text" name="password" value="<%= user.password %>"></td>
+				<td>Name: </td>
+				<td><input type="text" name="name" value="<%= user.name %>"></td>
 			</tr>
 			<tr>
 				<td>Type: </td>
@@ -39,6 +39,10 @@
 			<tr>
 				<td>Phone: </td>
 				<td><input type="number" name="phone" value="<%= user.phone %>"></td>
+			</tr>
+			<tr>
+				<td>Email: </td>
+				<td><input type="email" name="email" value="<%= user.email %>"></td>
 			</tr>
 			<tr>
 				<td></td>

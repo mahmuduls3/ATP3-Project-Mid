@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Detail</title>
+</head>
+<body>
+	<div>
+			<h2>User Detail Page</h2> 		
+	</div>
+
+	<a href="/home/view_users">View Users</a> |
+	<a href="/home/view_property">View Properties</a> |
+	<a href="/logout">Logout</a><br>
+
+		<table>
+			<tr>
+				<td>Image: </td>
+				<td><%= user.c_image %></td>
+			</tr>
+			<tr>
+				<td>ID: </td>
+				<td><%= user.customer_id %></td>
+			</tr>
+			<tr>
+				<td>Username: </td>
+				<td><%= user.username %></td>
+			</tr>
+			<tr>
+				<td>Name: </td>
+				<td><%= user.name %></td>
+			</tr>
+			<tr>
+				<td>Type: </td>
+				<td><%= user.type %></td>
+			</tr>
+			<tr>
+				<td>Phone: </td>
+				<td><%= user.phone %></td>
+			</tr>
+			<tr>
+				<td>Email: </td>
+				<td><%= user.email %></td>
+			</tr>
+		
+			<tr>
+				<td>Active Posts: </td>
+				<td><%= user.active_posts %></td>
+			</tr>
+			<tr>
+				<td>Pending Posts: </td>
+				<td><%= user.pending_posts %></td>
+			</tr>
+			<tr>
+				<td>Sold posts: </td>
+				<td><%= user.sold_posts %></td>
+			</tr>
+			<tr>
+				<td>Total posts: </td>
+				<td><%= user.total_posts %></td>
+			</tr>
+			
+		</table>
+
+
+</body>
+</html>
