@@ -22,10 +22,10 @@ module.exports= {
 		});
 	},
 	getByUsername: function(username, callback){
-		var sql = "select * from customer where username=?";
+		var sql = "select * from property where username=?";
 		db.getResults(sql, [username], function(results){
-			if(results.length > 0){
-				callback(results[0]);
+			if(results.length >= 0){
+				callback(results);
 			}else{
 				callback(null);
 			}
@@ -60,6 +60,39 @@ module.exports= {
 				callback(true);
 			}else{
 				callback(false);
+			}
+		});
+	},
+	getActivePosts: function(username, callback){
+		var sql = "select * from property where username=? and status=?";
+		var status = "allowed";
+		db.getResults(sql, [username, status], function(results){
+			if(results.length >= 0){
+				callback(results);
+			}else{
+				callback(null);
+			}
+		});
+	},
+	getPendingPosts: function(username, callback){
+		var sql = "select * from property where username=? and status=?";
+		var status = "pending";
+		db.getResults(sql, [username, status], function(results){
+			if(results.length >= 0){
+				callback(results);
+			}else{
+				callback(null);
+			}
+		});
+	},
+	getSoldPosts: function(username, callback){
+		var sql = "select * from property where username=? and status=?";
+		var status = "sold";
+		db.getResults(sql, [username, status], function(results){
+			if(results.length >= 0){
+				callback(results);
+			}else{
+				callback(null);
 			}
 		});
 	}

@@ -159,18 +159,35 @@ router.post('/delete_property/:property_id', function(req, res){
 		}
 	});
 });
-/*
-router.get('/user_detail/:username', function(req, res){
-	userModel.getByUsername(req.params.username, function(result){
-		res.render('home/user_detail', {user: result});
-	});
-});
-*/
+
 router.get('/user_detail/:username', function(req, res){
 	userModel.getByUsername(req.params.username, function(result){
 		res.render('home/user_detail', {user: result});
 	});
 });
 
+router.get('/user_active_posts/:username', function(req, res){
+	propertyModel.getActivePosts(req.params.username, function(result){
+		res.render('home/user_active_posts', {propertylist: result});
+	});
+});
+
+router.get('/user_pending_posts/:username', function(req, res){
+	propertyModel.getPendingPosts(req.params.username, function(result){
+		res.render('home/user_pending_posts', {propertylist: result});
+	});
+});
+
+router.get('/user_sold_posts/:username', function(req, res){
+	propertyModel.getSoldPosts(req.params.username, function(result){
+		res.render('home/user_sold_posts', {propertylist: result});
+	});
+});
+
+router.get('/user_total_posts/:username', function(req, res){
+	propertyModel.getByUsername(req.params.username, function(result){
+		res.render('home/user_total_posts', {propertylist: result});
+	});
+});
 
 module.exports = router;

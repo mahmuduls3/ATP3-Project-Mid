@@ -44,19 +44,19 @@
 		
 			<tr>
 				<td>Active Posts: </td>
-				<td><%= user.active_posts %></td>
+				<td><a href="/home/user_active_posts/<%= user.username%>"><%= user.active_posts %></a></td>
 			</tr>
 			<tr>
 				<td>Pending Posts: </td>
-				<td><%= user.pending_posts %></td>
+				<td><a href="/home/user_pending_posts/<%= user.username%>"><%= user.pending_posts %></a></td>
 			</tr>
 			<tr>
 				<td>Sold posts: </td>
-				<td><%= user.sold_posts %></td>
+				<td><a href="/home/user_sold_posts/<%= user.username%>"><%= user.sold_posts %></a></td>
 			</tr>
 			<tr>
 				<td>Total posts: </td>
-				<td><%= user.total_posts %></td>
+				<td><a href="/home/user_total_posts/<%= user.username%>"><%= user.total_posts %></a></td>
 			</tr>
 			
 		</table>
