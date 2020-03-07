@@ -95,6 +95,88 @@ module.exports= {
 				callback(null);
 			}
 		});
+	},
+	searchProperty: function(property, callback){
+		var title = property.title;
+		var location = property.location;
+		var bed = property.bed;
+		var bath = property.bath;
+		var floor = property.floor;
+		var price_from = property.price_from;
+		var price_to = property.price_to;
+		var purpose = property.purpose;
+		var type = property.type;
+		var status = property.status;
+		var orderby = property.orderby;
+
+		if(title){
+			title = " title = '" + property.title + "' and ";
+		}else{
+			title = " ";
+		}
+		if(location){
+			location = " property_area = '" + property.location + "' and ";
+		}else{
+			location = " ";
+		}
+		if(bed){
+			bed = " bed = " + property.bed + " and ";
+		}else{
+			bed = " ";
+		}
+		if(bath){
+			bath = " bath = " + property.bath + " and ";
+		}else{
+			bath = " ";
+		}
+		if(floor){
+			floor = " floor = '" + property.floor + "' and ";
+		}else{
+			floor = " ";
+		}
+		if(purpose){
+			purpose = " style = '" + property.purpose + "' and ";
+		}else{
+			purpose = " ";
+		}
+		if(type){
+			type = " p_type = '" + property.type + "' and ";
+		}else{
+			type = " ";
+		}
+		if(price_from){
+			price_from = " property_price  between " + property.price_from + " and ";
+		}else{
+			price_from = "  property_price  between 0 and  ";
+		}
+		if(price_to){
+			price_to = " " + property.price_to;
+		}else{
+			price_to = " 99999999999999 ";
+		}
+		if(status){
+			status = " status = '" + property.status + "' ";
+		}else{
+			status = " ";
+		}
+		if(orderby){
+			orderby = " " + property.orderby + " ";
+		}
+
+		var sql ="SELECT * FROM property where " + title + location + bed + bath + floor + purpose + type + status + price_from + price_to + orderby;
+		console.log(sql);
+		db.getResults(sql, null, function(results){
+
+			if(results.length >= 0){
+				console.log("Results found");
+				callback(results);
+			}else{
+				console.log("No Results");
+				callback(false);
+			}
+		});
 	}
 
 }
+
+//     [title, location, bed, bath, floor, purpose, type, price_from, price_to]

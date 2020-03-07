@@ -190,4 +190,28 @@ router.get('/user_total_posts/:username', function(req, res){
 	});
 });
 
+router.post('/view_property', function(req, res){
+	var property = {
+	    title: req.body.title,
+	    location: req.body.location,
+	    bed: req.body.bed,
+	    bath: req.body.bath,
+	    floor: req.body.floor,
+	    price_from: req.body.price_from,
+	    price_to: req.body.price_to,
+	    purpose: req.body.purpose,
+	    type: req.body.type,
+	    status: req.body.status,
+	    orderby: req.body.orderby
+	};
+	
+	propertyModel.searchProperty(property, function(results){
+		if(results.length >= 0){
+			res.render('home/view_property', {propertylist: results});
+		}else{
+			res.redirect('/home');
+		}
+	});
+});
+
 module.exports = router;
