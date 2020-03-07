@@ -93,4 +93,38 @@ module.exports= {
 			}
 		});
 	},
+	searchCustomer : function(user, callback){
+		var username = user.username;
+		var email = user.email;
+		var type = user.type;
+		var orderby = user.orderby;
+		if (username) {
+			username = " and username like '%" + user.username + "%' ";
+		}else{
+			username = " ";
+		}
+		if (email) {
+			email = " and email like '%" + user.email + "%' ";
+		}else{
+			email = " ";
+		}
+		if (type) {
+			type = " and type = '" + user.type + "'  ";
+		}else{
+			type = " ";
+		}
+		if(orderby){
+			orderby = " " + user.orderby + " , customer_id " ;
+		}
+
+		var sql = "select * from customer where customer_id between 0 and 999999999 " + username + email + type + orderby ;
+		console.log(sql);
+		db.getResults(sql, null, function(results){
+			if(results.length >= 0){
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	}
 }

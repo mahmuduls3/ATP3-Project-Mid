@@ -29,6 +29,23 @@ router.get('/view_users', function(req, res){
 		});
 });
 
+router.post('/view_users', function(req, res){
+		var user = {
+			username: req.body.username,
+			email: req. body.email,
+			type: req.body.type,
+			orderby: req.body.orderby
+		};
+
+		userModel.searchCustomer(user, function(results){
+			if(results.length >= 0){
+				res.render('home/view_users', {userlist: results});
+			}else{
+				res.redirect('/home');
+			}
+		});
+});
+
 router.get('/edit/:customer_id', function(req, res){
 	userModel.getByCustomerId(req.params.customer_id, function(result){
 		res.render('home/edit', {user: result});

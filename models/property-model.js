@@ -110,12 +110,12 @@ module.exports= {
 		var orderby = property.orderby;
 
 		if(title){
-			title = " title = '" + property.title + "' and ";
+			title = " title = '%" + property.title + "%' and ";
 		}else{
 			title = " ";
 		}
 		if(location){
-			location = " property_area = '" + property.location + "' and ";
+			location = " property_area = '%" + property.location + "%' and ";
 		}else{
 			location = " ";
 		}
@@ -155,12 +155,12 @@ module.exports= {
 			price_to = " 99999999999999 ";
 		}
 		if(status){
-			status = " status = '" + property.status + "' ";
+			status = " status = '" + property.status + "' and ";
 		}else{
 			status = " ";
 		}
 		if(orderby){
-			orderby = " " + property.orderby + " ";
+			orderby = " " + property.orderby + ", property_id ";
 		}
 
 		var sql ="SELECT * FROM property where " + title + location + bed + bath + floor + purpose + type + status + price_from + price_to + orderby;
