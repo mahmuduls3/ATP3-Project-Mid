@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Message List</title>
+</head>
+<body>
+	<div>
+			<h2>Message List</h2> 		
+	</div>
+
+	<a href="/home">Back</a>|
+	<a href="/home/view_users">View users</a> |
+	<a href="/home/view_property">View Properties</a> |
+	<a href="/home/view_message">View Message</a> |
+	<a href="/logout">Logout</a><br>
+
+	<form method="post">
+		<input type="text" name="from" placeholder="From">
+		<input type="text" name="to" placeholder="To">
+		<input type="text" name="msg" placeholder="Write message to search">
+		<select name="orderby">
+			<option value="">Order By</option>
+			<option value="order by msg_date">Most recent</option>
+			<option value="order by msg_date desc">Most older</option>
+		</select>
+		<input type="submit" name="" value="Search">
+	</form>
+
+	<table border="1">
+		<tr>
+			<td>ID </td>
+			<td>From </td>
+			<td>To </td>
+			<td>Message </td>
+			<td>Date </td>
+		</tr>
+	<% for(var i=0; i < messagelist.length; i++){ %>
+		<tr>
+			<td><%= messagelist[i].message_id %></td>
+			<td><a href="/home/user_detail/<%= messagelist[i].from %>"><%= messagelist[i].from %></a></td>
+			<td><a href="/home/user_detail/<%= messagelist[i].to %>"><%= messagelist[i].to %></a></td>
+			<td><%= messagelist[i].msg %></td>
+			<td><%= messagelist[i].msg_date.toString().split(" ").slice(0, 4).join(" ") %></td>
+		</tr>
+	<%  } %>
+	</table>
+
+</body>
+</html>

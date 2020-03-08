@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var userModel = require.main.require('./models/user-model');
 var propertyModel = require.main.require('./models/property-model');
+var messageModel = require.main.require('./models/message-model');
 
 
 router.get('*', function(req, res, next){
@@ -229,6 +230,34 @@ router.post('/view_property', function(req, res){
 			res.redirect('/home');
 		}
 	});
+});
+
+router.get('/view_message', function(req, res){
+	
+		messageModel.getAllMessage(function(results){
+			if(results.length >= 0){
+				res.render('home/view_message', {messagelist: results});
+			}else{
+				res.redirect('/home');
+			}
+		});
+});
+
+router.post('/view_message', function(req, res){
+		var message = {
+			from: req.body.from,
+			to: req. body.to,
+			msg: req.body.msg,
+			orderby: req.body.orderby
+		};
+
+		messageModel.searchMessage(message, function(results){
+			if(results.length >= 0){
+				res.render('home/view_message', {messagelist: results});
+			}else{
+				res.redirect('/home');
+			}
+		});
 });
 
 module.exports = router;
