@@ -45,7 +45,9 @@ module.exports= {
 	insert: function(user, callback){
 		var sql = "insert into customer values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		var type = "customer";
+		console.log("Registration query");
 		db.execute(sql, [null, user.username, user.name, user.password, type, user.phone, user.email, user.image, 0, 0, 0, 0], function(status){
+		console.log(sql);
 			if(status){
 				callback(true);
 			}else{
