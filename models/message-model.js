@@ -14,20 +14,20 @@ module.exports= {
 	},
 	
 	getByUsernameFrom: function(username, callback){
-		var sql = "select * from message where from=?";
+		var sql = "select * from message where message.from=?";
 		db.getResults(sql, [username], function(results){
-			if(results.length > 0){
-				callback(results[0]);
+			if(results.length >= 0){
+				callback(results);
 			}else{
 				callback(null);
 			}
 		});
 	},
 	getByUsernameTo: function(username, callback){
-		var sql = "select * from message where to=?";
+		var sql = "select * from message where message.to=?";
 		db.getResults(sql, [username], function(results){
-			if(results.length > 0){
-				callback(results[0]);
+			if(results.length >= 0){
+				callback(results);
 			}else{
 				callback(null);
 			}

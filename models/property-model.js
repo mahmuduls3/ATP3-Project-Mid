@@ -14,10 +14,31 @@ module.exports= {
 	getAllProperty : function(callback){
 		var sql = "select * from property order by property_id";
 		db.getResults(sql, null, function(results){
-			if(results.length > 0){
+			if(results.length >= 0){
 				callback(results);
 			}else{
 				callback([]);
+			}
+		});
+	},
+	getAllPropertyGuest : function(callback){
+		var sql = "select * from property where status = 'allowed' order by property_id";
+		db.getResults(sql, null, function(results){
+			if(results.length >= 0){
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	getAllPendingPosts: function(callback){
+		var sql = "select * from property where status=?";
+		var status = "pending";
+		db.getResults(sql, [status], function(results){
+			if(results.length >= 0){
+				callback(results);
+			}else{
+				callback(null);
 			}
 		});
 	},
@@ -31,8 +52,8 @@ module.exports= {
 			}
 		});
 	},
-	allow : function(id, callback){
-		var sql = "update property set status=?, where property_id=?";
+	allow: function(id, callback){
+		var sql = "update property set status=? where property_id=?";
 		var status = "allowed";
 		db.execute(sql, [status, id], function(status){
 			if(status){
@@ -43,7 +64,7 @@ module.exports= {
 		});
 	},
 	deny: function(id, callback){
-		var sql = "update from property set status=? where property_id=?";
+		var sql = "update property set status=? where property_id=?";
 		var status = "denied";
 		db.execute(sql, [status, id], function(status){
 			if(status){
@@ -110,12 +131,12 @@ module.exports= {
 		var orderby = property.orderby;
 
 		if(title){
-			title = " title = '%" + property.title + "%' and ";
+			title = " title like '%" + property.title + "%' and ";
 		}else{
 			title = " ";
 		}
 		if(location){
-			location = " property_area = '%" + property.location + "%' and ";
+			location = " property_area like '%" + property.location + "%' and ";
 		}else{
 			location = " ";
 		}
@@ -164,6 +185,82 @@ module.exports= {
 		}
 
 		var sql ="SELECT * FROM property where " + title + location + bed + bath + floor + purpose + type + status + price_from + price_to + orderby;
+		console.log(sql);
+		db.getResults(sql, null, function(results){
+
+			if(results.length >= 0){
+				console.log("Results found");
+				callback(results);
+			}else{
+				console.log("No Results");
+				callback(false);
+			}
+		});
+	},
+	searchPropertyGuest: function(property, callback){
+		var title = property.title;
+		var location = property.location;
+		var bed = property.bed;
+		var bath = property.bath;
+		var floor = property.floor;
+		var price_from = property.price_from;
+		var price_to = property.price_to;
+		var purpose = property.purpose;
+		var type = property.type;
+		var orderby = property.orderby;
+
+		if(title){
+			title = " and title like '%" + property.title + "%'  ";
+		}else{
+			title = " ";
+		}
+		if(location){
+			location = " and  property_area like '%" + property.location + "%'  ";
+		}else{
+			location = " ";
+		}
+		if(bed){
+			bed = " and  bed = " + property.bed + "  ";
+		}else{
+			bed = " ";
+		}
+		if(bath){
+			bath = " and  bath = " + property.bath + "  ";
+		}else{
+			bath = " ";
+		}
+		if(floor){
+			floor = " and  floor = '" + property.floor + "'  ";
+		}else{
+			floor = " ";
+		}
+		if(purpose){
+			purpose = " and  style = '" + property.purpose + "'  ";
+		}else{
+			purpose = " ";
+		}
+		if(type){
+			type = " and  p_type = '" + property.type + "'  ";
+		}else{
+			type = " ";
+		}
+		if(price_from){
+			price_from = " and  property_price  between " + property.price_from + " ";
+		}else{
+			price_from = " and   property_price  between 0   ";
+		}
+		if(price_to){
+			price_to = " and  " + property.price_to;
+		}else{
+			price_to = " and  99999999999999 ";
+		}
+		if(orderby){
+			orderby = " " + property.orderby + ", property_id ";
+		}else{
+			orderby = " order by property_id ";
+		}
+		console.log("Hello");
+		var sql ="SELECT * FROM property where status = 'allowed' " + title + location + bed + bath + floor + purpose + type + status + price_from + price_to + orderby + " ";
 		console.log(sql);
 		db.getResults(sql, null, function(results){
 

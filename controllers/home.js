@@ -15,9 +15,33 @@ router.get('*', function(req, res, next){
 
 router.get('/', function(req, res){
 	userModel.getByUsername(req.cookies['username'], function(result){
-		res.render('home/index', {user: result});
+		propertyModel.getAllPendingPosts(function(results){
+			res.render('home/index', {user: result, propertylist: results});
+		});
+		
 	});
 });
+
+router.get('/allow/:property_id', function(req, res){
+	propertyModel.allow(req.params.property_id, function(status){
+		if (status) {
+			res.redirect('/home');
+		} else{
+			res.send("Allowing this post made some error");
+		}
+	});
+});
+
+router.get('/deny/:property_id', function(req, res){
+	propertyModel.deny(req.params.property_id, function(status){
+		if (status) {
+			res.redirect('/home');
+		} else{
+			res.send("Denying this post made some error");
+		}
+	});
+});
+
 
 router.get('/view_users', function(req, res){
 	
@@ -180,7 +204,9 @@ router.post('/delete_property/:property_id', function(req, res){
 
 router.get('/user_detail/:username', function(req, res){
 	userModel.getByUsername(req.params.username, function(result){
-		res.render('home/user_detail', {user: result});
+		messageModel.getByUsernameFrom(req.params.username, function(results){
+			res.render('home/user_detail', {user: result, messagelist: results});
+		});
 	});
 });
 

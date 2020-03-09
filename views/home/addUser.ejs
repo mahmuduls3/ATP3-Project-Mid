@@ -2,29 +2,37 @@
 <html>
 <head>
 	<title>Add User</title>
-	<link rel="stylesheet" type="text/css" href="admin/style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<h2>Add User</h2>
-
-	<form method="post">
-		Username: <input type="text" name="uname"><br>
-		Name: <input type="text" name="name"><br>
-		Password: <input type="password" name="password"><br>
-		Confirm Password: <input type="password" name="confirmPassword"><br>
-		<select name="type">
-			<option type="text" value="admin">Admin</option>
-			<option type="text" value="moderator">Moderator</option>
-			<option type="text" value="employee">Employee</option>
-			<option type="text" value="customer">Customer</option>
-		</select><br>
-		Email: <input type="email" name="email"><br>
-		Phone: <input type="number" name="phone"><br>
-		<input type="submit" name="" value="Add new user">
-	</form>
-	<hr>
-	<h4>
-		<a href="/home">Back</a>
-	</h4>
+	<div class="container">
+		<h2 class="text-center">Add User</h2>
+		
+		<h4>
+			<a href="/home"  class="btn btn-outline-primary float-right mr-3 mb-3" >Back</a>
+		</h4>
+		<br>
+		<hr>
+		<div class="form-row justify-content-center">
+			<form method="post" class="form-group" >
+				<input type="text" class="form-control" name="uname" placeholder="Username"><br>
+				<input type="text" class="form-control" name="name" placeholder="Name"><br>
+				<input type="password" class="form-control " name="password" placeholder="Password"><br>
+				<input type="password" class="form-control " name="confirmPassword" placeholder="Confirm Password"><br>
+				<select name="type" class="btn btn-secondary dropdown-toggle mb-3 ">
+					<option type="text" value="admin">Admin</option>
+					<option type="text" value="moderator">Moderator</option>
+					<option type="text" value="employee">Employee</option>
+					<option type="text" value="customer">Customer</option>
+				</select><br>
+				<input type="email" class="form-control " name="email" placeholder="Email"><br>
+				<input type="number" class="form-control " name="phone" placeholder="Phone"><br>
+				<input type="submit"  class="btn btn-outline-success " name="" value="Add new user">
+			</form>
+		</div>
+		
+	</div>
+	
 </body>
 </html>
